@@ -21,6 +21,11 @@ app.use('/api/dashboard',    require('./src/routes/dashboard'));
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🔥 CozinhaOS API rodando na porta ${PORT}`);
-});
+// Só inicia o servidor se não estiver em ambiente serverless (Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🔥 CozinhaOS API rodando na porta ${PORT}`);
+  });
+}
+
+module.exports = app;
